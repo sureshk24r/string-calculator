@@ -16,11 +16,19 @@ namespace challenge_calculator
 
             //List for collecting negative numbers
             List<int> negativeNumberList = new List<int>();
+            //Support Custom delimiter
+            var customdelimiter = "";
+
+            if (userInput.Contains("//"))
+            {
+                int endindexofDelimiter = userInput.IndexOf("\\n");
+                customdelimiter = userInput.Substring(2, (endindexofDelimiter - 2));
+            }
             //Split the string based on the separators
-            string[] commaSeparatedNumbers = userInput.Split(new string[] { ",", "\\n" }, StringSplitOptions.None);
+            string[] calculatedNumbers = userInput.Split(new string[] { ",", "\\n", customdelimiter }, StringSplitOptions.None);
 
             bool isNegativeNumber = false;
-            foreach (var number in commaSeparatedNumbers)
+            foreach (var number in calculatedNumbers)
             {
                 int parsedInteger = 0;
 
