@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace challenge_calculator
@@ -16,25 +16,35 @@ namespace challenge_calculator
 
             //List for collecting negative numbers
             List<int> negativeNumberList = new List<int>();
-            
-            //Support custome delimiter
-            var customdelimiter = "";
+
+            //Support custom delimiter
+            string customdelimiterstring = "";
+
+            string[] customeDelimiters;
 
             if (userInput.Contains("//"))
             {
                 int endindexofDelimiter = userInput.IndexOf("\\n");
-                customdelimiter = userInput.Substring(2, (endindexofDelimiter - 2));
+                customdelimiterstring = userInput.Substring(2, (endindexofDelimiter - 2));
 
-                //Check for any length delimiter
-                if (customdelimiter.Contains("["))
-                    customdelimiter = customdelimiter.Substring(1, (customdelimiter.Length - 2));
+                //Check for multiple any length delimiters
+                if (customdelimiterstring.Contains("["))
+                    customdelimiterstring = customdelimiterstring.Substring(1, (customdelimiterstring.Length - 2));
             }
+
+            //Get all the custom delimiters and replace them with "-"
+            customeDelimiters = customdelimiterstring.Split(new string[] { "][" }, StringSplitOptions.None);
+            foreach(var delimiter in customeDelimiters)
+            {
+                userInput = userInput.Replace(delimiter, "-");
+            }
+
             //Split the string based on the separators
-            string[] calculatedNumbers = userInput.Split(new string[] { ",", "\\n", customdelimiter }, StringSplitOptions.None);
+            string[] calculatedNumbers = userInput.Split(new string[] { ",", "\\n", "-" }, StringSplitOptions.None);
 
             bool isNegativeNumber = false;
             foreach (var number in calculatedNumbers)
-            {
+            { 
                 int parsedInteger = 0;
 
                 //Try parsing the string to an integer.
