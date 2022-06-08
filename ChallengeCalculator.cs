@@ -14,7 +14,7 @@ namespace challenge_calculator
             List<int> intList = new List<int>();
 
             //Split the string based on the separators
-            string[] commaSeparatedNumbers = userInput.Split(new string[] { "," }, StringSplitOptions.None);
+            string[] commaSeparatedNumbers = userInput.Split(new string[] { ",", "\\n" }, StringSplitOptions.None);
 
             foreach (var number in commaSeparatedNumbers)
             {
