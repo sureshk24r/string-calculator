@@ -30,6 +30,9 @@ namespace challenge_calculator
                     //Convert the unparsed string to 0
                     parsedInteger = 0;
                 }
+                //if the integer value is greater than 1000, reset it to 0
+                if (parsedInteger > 1000)
+                    parsedInteger = 0;
 
                 intList.Add(parsedInteger);
                 //If the parsed integer value is negative, add it to the list.
