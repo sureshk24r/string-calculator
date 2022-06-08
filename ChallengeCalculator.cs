@@ -16,9 +16,6 @@ namespace challenge_calculator
             //Split the string based on the separators
             string[] commaSeparatedNumbers = userInput.Split(new string[] { "," }, StringSplitOptions.None);
 
-            if (commaSeparatedNumbers.Count() > 2)
-                throw new ArgumentException("More than two numbers are not allowed");
-
             foreach (var number in commaSeparatedNumbers)
             {
                 int parsedInteger = 0;
